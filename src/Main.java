@@ -5,20 +5,24 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import static sun.security.krb5.Confounder.longValue;
+
+
+
 public class Main {
     public static void main(String[] args) {
 
-        Person person1 = new Person("Oleg",18);
-        Person person2 = new Person("Rick",40);
+        Person person1 = new Person("Oleg", 18);
+        Person person2 = new Person("Rick", 40);
         Person person3 = new Person("Vlad", 13);
-        Person person4 = new Person("Jack",50);
+        Person person4 = new Person("Jack", 50);
 
-        List <Person> people=new ArrayList<>();
+        List<Person> people = new ArrayList<>();
         people.add(person1);
         people.add(person2);
         people.add(person3);
         people.add(person4);
-        for(Person person : people){
+        for (Person person : people) {
             System.out.println(person);
         }
         System.out.println("------------");
@@ -37,50 +41,55 @@ public class Main {
 
         System.out.println("---------");
 
-        // не очень понимаю как вывести в консоль consumer? через people.  или как вообще?
-        //как его использовать? например его нужно использовать чтобы сделать что то конкретное и один раз?чтоб не рассписывать отделный класс?
-        //можно ли его использовать например для помещения "выполненых задач" в отделный список в предстоящей курсовой?(так как он не возвращает значение)
         Consumer<Person> consumer = new Consumer<Person>() {
             @Override
             public void accept(Person person) {
-                System.out.println( "Привет мое имя" + person.getName() + " Возраст "+ person.getAge());
+                System.out.println("Привет мое имя " + person.getName() + " Возраст " + person.getAge());
             }
         };
-        System.out.println(consumer);
+        consumer.accept(person1);
+        consumer.accept(person2);
 
-        Consumer<Person> consumer1 = person -> System.out.println( "Привет мое имя" + person.getName() + " Возраст "+ person.getAge());
+
+        Consumer<Person> consumer1 = person -> System.out.println("Привет мое имя" + person.getName() + " Возраст " + person.getAge());
+        consumer1.accept(person3);
 
 
-        // По поводу задания 3 Function не много не понял...нужно создать переменные типа double и longe?  или только double? а потом поменять тип?
-//        Function<double,long> function = new Function<double, long>() {
-//            @Override
-//            public long apply(double v) {
-//                return 0;
-//            }
-//        };
+        Function<Double, Long> function = new Function<Double, Long>() {
+            @Override
+            public Long apply(Double aDouble) {
+                return longValue();
+            }
+        };
+        function.apply(1234.433);
+
+        Function<Double, Long> function1 = aDouble -> longValue();
+
         System.out.println("------");
 
-          //Такой же вопрос...не могу вывести...да и правильно ли вообще ранодом реализован оносительно Person?
-        // А если пытаюсь положить другой тип кроме Person то все красное...
-        Supplier <Person> personSupplier = new Supplier<Person>() {
+        Supplier<Person> personSupplier = new Supplier<Person>() {
             @Override
             public Person get() {
                 double a = Math.random();
                 return people.get((int) a);
             }
         };
-        System.out.println(personSupplier);
-
-         // 5е задание вообще не понял...при копировании текста все красное...если пересоздать то что за параметры <T U> ? я понял что нужно написать метод))
-//       Function <T, U> Function<T, U> ternaryOperator(
-//                Predicate<? super T> condition,
-//                Function<? super T, ? extends U> ifTrue,
-//                Function<? super T, ? extends U> ifFalse) {
-//
-//
-//
-//        }
-
-
+        personSupplier.get();
     }
 }
+
+//       public static <T, U> Function<T, U> ternaryOperator(
+//            Predicate<Integer> condition,
+//            Function<? super T, ? extends U> ifTrue,
+//            Function<? super T, ? extends U> ifFalse) {
+//        if(condition.test(1)){
+//            return (Function<T, U>) ifTrue;
+//        }
+//        else return (Function<T, U>) ifFalse;
+//        condition.test(1).
+//    }
+//
+//}
+
+
+
