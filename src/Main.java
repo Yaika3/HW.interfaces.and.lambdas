@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -61,7 +62,9 @@ public class Main {
                 return longValue();
             }
         };
-        function.apply(1234.433);
+
+        System.out.println(function.apply(1234.433));
+
 
         Function<Double, Long> function1 = aDouble -> longValue();
 
@@ -74,22 +77,26 @@ public class Main {
                 return people.get((int) a);
             }
         };
-        personSupplier.get();
-    }
-}
 
-//       public static <T, U> Function<T, U> ternaryOperator(
-//            Predicate<Integer> condition,
-//            Function<? super T, ? extends U> ifTrue,
-//            Function<? super T, ? extends U> ifFalse) {
-//        if(condition.test(1)){
-//            return (Function<T, U>) ifTrue;
-//        }
-//        else return (Function<T, U>) ifFalse;
-//        condition.test(1).
-//    }
-//
-//}
+        System.out.println(personSupplier.get());
+
+    }
+
+
+       public static <T, U> Function<T, U> ternaryOperator(
+            Predicate<? super T> condition,
+            Function<? super T, ? extends U> ifTrue,
+            Function<? super T, ? extends U> ifFalse) {
+           int i = 5;
+           if(i <5){
+            return (Function<T, U>) ifTrue;
+        }
+           else return (Function<T, U>) ifFalse;
+
+    }
+
+
+}
 
 
 
