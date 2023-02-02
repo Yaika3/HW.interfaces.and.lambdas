@@ -79,6 +79,7 @@ public class Main {
         };
 
         System.out.println(personSupplier.get());
+        System.out.println(ternaryOperator(3));
 
     }
 
@@ -87,16 +88,17 @@ public class Main {
             Predicate<? super T> condition,
             Function<? super T, ? extends U> ifTrue,
             Function<? super T, ? extends U> ifFalse) {
-           int i = 5;
-           if(i <5){
+        if (condition == 5){
             return (Function<T, U>) ifTrue;
         }
-           else return (Function<T, U>) ifFalse;
+        }
+
+
 
     }
 
 
-}
+
 
 
 
