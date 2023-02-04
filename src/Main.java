@@ -79,23 +79,35 @@ public class Main {
         };
 
         System.out.println(personSupplier.get());
-        System.out.println(ternaryOperator(3));
+
 
     }
 
+    }
+   class Lesson10 {
+    public static void main(String[] args) {
 
-       public static <T, U> Function<T, U> ternaryOperator(
+    }
+    public static <T, U> Function<T, U> ternaryOperator(
             Predicate<? super T> condition,
             Function<? super T, ? extends U> ifTrue,
             Function<? super T, ? extends U> ifFalse) {
-        if (condition == 5){
-            return (Function<T, U>) ifTrue;
-        }
-        }
+        Function<T, U> buildedFunction = x -> {
+            if (condition == x) {
+                return (U) ifTrue;
+            } else {
 
+                return (U) ifFalse;
+            }
+        };
 
-
+        return buildedFunction;
     }
+
+
+        }
+
+
 
 
 
