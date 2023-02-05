@@ -83,29 +83,39 @@ public class Main {
 
     }
 
-    }
-   class Lesson10 {
-    public static void main(String[] args) {
-
-    }
-    public static <T, U> Function<T, U> ternaryOperator(
-            Predicate<? super T> condition,
-            Function<? super T, ? extends U> ifTrue,
-            Function<? super T, ? extends U> ifFalse) {
-        Function<T, U> buildedFunction = x -> {
-            if (condition == x) {
-                return (U) ifTrue;
-            } else {
-
-                return (U) ifFalse;
-            }
-        };
-
-        return buildedFunction;
-    }
-
-
+    Predicate<Integer> condition = new Predicate<Integer>() {
+        @Override
+        public boolean test(Integer integer) {
+            return integer > 0;
         }
+
+        Function<Integer, Integer> ifTrue = integer -> * 10;
+        Function<Integer, Integer> ifFalse = integer -> * -10;
+        Function<Integer, Integer> ternOperator = Lesson10.ternaryOperator(condition, ifTrue, ifFalse);
+    System.out.println();
+
+    };
+}
+   class Lesson10 {
+       public static void main(String[] args) {
+
+       }
+
+       public static <T, U> Function<T, U> ternaryOperator(
+               Predicate<? super T> condition,
+               Function<? super T, ? extends U> ifTrue,
+               Function<? super T, ? extends U> ifFalse) {
+           Function<T, U> buildedFunction = x -> {
+               if (condition.test(x)) {
+                   return ifTrue.apply(x);
+               } else {
+                   return ifFalse.apply(x);
+               }
+           };
+
+           return buildedFunction;
+       }
+   }
 
 
 
